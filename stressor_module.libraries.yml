@@ -1,0 +1,28 @@
+# Custom module library for general purposes.
+stressor-module-css-js:
+  js:
+    js/stressor_module.js: {}
+  css:
+    theme:
+      css/stressor_module.css: {}
+
+stressor-module-node:
+  js:
+    js/highcharts.js: {}
+    js/stressor_node.js: {}
+  css:
+    theme:
+      css/stressor_node.css: {}
+      css/stressor_module.css: {}
+
+stressor-module-editor-css:
+  css:
+    theme:
+      css/stressor_editor.css: {}
+
+# Dygraph plots
+highcharts:
+  js:
+    js/highcharts.js: {}
+    js/exporting.js: {}
+    js/export-data.js: {}

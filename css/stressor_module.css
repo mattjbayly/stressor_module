@@ -1,0 +1,238 @@
+
+/* Hide personal branding content */
+.header {
+    display: none;
+}
+.copyright {
+    display: none;
+}
+.header-top {
+    display: none; 
+}
+
+.stressor-list p {
+    margin: 0px;
+}
+
+
+.view-stressor-response .view-filters {
+    color: hsl(0, 11%, 19%)(37, 30%, 60%);
+    background-color: hsl(190, 46%, 95%);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.view-stressor-response label {
+    /* Make the font smaller */
+    font-size: smaller;
+}
+.view-stressor-response .view-filters .js-form-type-checkbox {
+    padding-left: 5px;
+}
+
+.view-stressor-response .view-filters .views-exposed-form {
+    column-count: 3; /* Adjust the number of columns as needed */
+}
+
+.stressor-list { 
+    overflow: hidden;
+}
+
+.row-even-sr {
+    background-color: hsl(204, 71%, 99%);
+}
+.row-odd-sr {
+    background-color: hsl(160, 7%, 91%);
+}
+
+.stressor-list-panel {
+    padding: 10px;
+    margin: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.stressor-list-panel:hover {
+    background-color: #d0dcee;
+}
+h5.stressor-list:hover {
+    color: #2c76e3;
+}
+
+
+.stressor-list-group li {
+    list-style-type: none;
+}
+
+input[type=checkbox].sr-select {
+    zoom: 2;
+}
+
+.bdisabled {
+    color: lightgrey !important;
+    background-color: darkgrey !important;
+    cursor: not-allowed;
+}
+
+.overflow-70 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 70ch;
+}
+
+.overflow-40 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 40ch;
+}
+
+.overflow-30 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 30ch;
+    overflow-y: hidden;
+}
+
+.btn-animated {
+    position: relative;
+    background-color: transparent;
+    color: var(--dark);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    transition: all 0.3s linear;
+    display: inline-flex
+}
+.btn-animated:hover {
+    color: #d0dcee;
+}
+
+.layout--onecol {
+    background-color: rgb(242, 242, 242);
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.layout--twocol-section {
+    background-color: rgb(218, 218, 218);
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.layout--threecol-section {
+    background-color: rgb(242, 242, 242);
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.field--name-field-genus .field-item {
+    font-style: italic;
+    display: inline-block;
+}
+.field--name-field-species-latin- .field-item {
+    font-style: italic;
+    display: inline-block;
+}
+.node-content .field__label {
+    font-size: smaller;
+    color: #6b6d6d;
+}
+.node-content .layout--threecol-section .field-item {
+    display: inline-block;
+}
+.node-content .layout--threecol-section .field__label {
+    display: inline-block;
+}
+.field--name-field-species-common-name .field-item {
+    display: block;
+    white-space: pre;
+    font-weight: bolder;
+    color: #132f58;
+}
+
+.node-content #field_stressor_response_csv_data-0-csvfiletable {
+    max-width: 650px;
+    text-align: center;
+}
+.node-content #field_stressor_response_csv_data-0-csvfiletable td {
+    padding: 2px;
+}
+.node-content #field_stressor_response_csv_data-0-csvfiletable tr {
+    padding: 2px;
+}
+
+
+
+.layout--threecol-section .layout__region {
+    float: left;
+    width: 33.33%;
+}
+/* Clear floats after the columns */
+.layout--threecol-section:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+    
+.layout--twocol-section .layout__region {
+    float: left;
+    width: 50%;
+}
+/* Clear floats after the columns */
+.layout--twocol-section:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+    
+/* Responsive layout - when the screen is less than 600px wide, make the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .layout--threecol-section .layout__region {
+      width: 100%;
+    }
+    .layout--twocol-section .layout__region {
+        width: 100%;
+    }
+}
+
+/* Dropdown Button */
+.dropbtn {
+    cursor: pointer;
+}
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}

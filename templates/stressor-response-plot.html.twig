@@ -1,0 +1,11 @@
+{# templates/stressor_response_plot.html.twig #}
+<a class="button" style="margin-bottom: 20px;" href="/stressor-response"><i class="fa fa-arrow-left"></i> Go back to library of all stressor response functions</a>
+<p>The stressor response comparison overlays plot allows users to review similar stressor response curves for a given metric from different studies in different systems (e.g., stream temperature on Coho rearing). These comparisons are useful when trying to determine which SR profiles are most relevant vs least relevant for your study system. The plots also allow us to visualize the underlying sensitivity across studies for a given stressor.</p>
+
+<div id="my-highcharts-container"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    Highcharts.chart('my-highcharts-container', {{ highcharts_data|raw }});
+  });
+</script>

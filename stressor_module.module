@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * @file
+ * Implemented hooks for the stressor_module module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function stressor_module_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.stressor_module':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A stressor response module.') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function stressor_module_preprocess_node(&$variables) {
+  // Add custom css and js to stressor response node detail view
+  $node = $variables['node'];
+  $view_mode = $variables['view_mode'];
+  $node_type = $node->getType();
+  //\Drupal::messenger()->addMessage(t($view_mode));
+  //\Drupal::messenger()->addMessage(t($node_type));
+  //\Drupal::messenger()->addMessage(t($node_label));
+  // Assign custom css and js to a specific blog post
+  if ($node_type == 'stressor_response' && $view_mode == "full") {
+    //\Drupal::messenger()->addMessage(t("Doing it..."));
+
+    $custom_html = '<a href="/stressor-response/"><i class="fa fa-solid fa-arrow-left"></i> View all records in the stressor response library</a>';
+    $highcharts_div = '<div id="parentChartContianer"><br><p>Stressor Response Chart</p><div id="chartContainer"></div></div>';
+
+    // Use Drupal's renderer service to render the node content array to a string.
+    $content_rendered = \Drupal::service('renderer')->renderRoot($variables['content']);
+    // Prepend the custom HTML to the rendered content.
+    $variables['content'] = [
+      '#markup' => $custom_html . $content_rendered . $highcharts_div,
+    ];
+    $variables['#attached']['library'][] = 'stressor_module/stressor-module-node';
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function stressor_module_preprocess_views_view(&$variables) {
+  // Add custom css and js to stressor response list view
+  $view = $variables['view'];
+  $display_name = $view->id();
+  if ($display_name == 'stressor_response') {
+    //\Drupal::messenger()->addMessage(t("Doing it 2..."));
+    $variables['#attached']['library'][] = 'stressor_module/stressor-module-css-js';
+  }
+}
+
+
+/**
+ * Implements hook_cron().
+ */
+function stressor_module_cron() {
+  \Drupal::messenger()->addMessage(t("This is a test message"));  
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function stressor_module_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  
+  //\Drupal::messenger()->addMessage(t($form_id));
+  if($form_id == 'node_stressor_response_edit_form' || $form_id == 'node_stressor_response_form') {
+    
+    // Define your custom HTML markup.
+    $custom_html = [
+      '#type' => 'markup',
+      '#markup' => '<a href="/stressor-response/"><i class="fa fa-solid fa-arrow-left"></i> View all records in the stressor response library</a>',
+      '#weight' => -100, // Adjust the weight to position your content.
+    ];
+
+    // Insert the markup above the title field.
+    $form = ['custom_html' => $custom_html] + $form;
+
+    /*
+    Add in the duplcate button
+    $form['actions']['save_as_new'] = [
+      '#type' => 'submit',
+      '#value' => t('Duplicate and edit as a new Profile'),
+      '#submit' => ['stressor_module_clone_node_submit_handler'],
+      '#weight' => -1000, // Set a low weight to move it to the top
+    ];
+    */
+
+      // Define the 'Save As New' button
+      $save_as_new_button = [
+        '#type' => 'submit',
+        '#value' => t('Duplicate record data and then edit as a new profile'),
+        '#submit' => ['stressor_module_clone_node_submit_handler'],
+    ];
+
+    // Prepend the button to the beginning of the form
+    $form = ['save_as_new' => $save_as_new_button] + $form;
+
+    
+    // Sample csv file download link
+    $download_link = \Drupal\Core\Url::fromRoute('stressor_module.download_csv')->toString();
+    $custom_markup = [
+      '#type' => 'markup',
+      '#markup' => '<h3><a href="/sr-curve-trace" target="_blank">Use the SR curve tracing tool</a></h3><a href="' . $download_link . '" download>Download Sample CSV</a>',
+    ];
+
+    // Render the markup array into an HTML string.
+    $html = \Drupal::service('renderer')->renderRoot($custom_markup);
+
+    // Insert the markup before a specific field.
+    // Replace 'field_YOUR_FIELD_NAME' with the machine name of the field.
+    $form['field_stressor_response_csv_data']['#prefix'] = $html;
+    $form['actions']['submit']['#value'] = t("Save SR Profile");
+    $form['#attached']['library'][] = 'stressor_module/stressor-module-editor-css';
+
+      //\Drupal::messenger()->addMessage(t($form_id));
+
+
+  }
+}
+
+
+/**
+ * Implement
+ */
+function stressor_module_theme($existing, $type, $theme, $path) {
+  return [
+    'stressor_response_plot' => [
+      'variables' => ['markup' => NULL, 'sr_plot_data' => NULL, 'highcharts_data' => NULL],
+    ],
+  ];
+}
+
+/**
+ * Custom submission handler to clone the node.
+ */
+function stressor_module_clone_node_submit_handler(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Retrieve the original node
+  $node = $form_state->getFormObject()->getEntity();
+
+  // Create a duplicate of the node
+  $new_node = $node->createDuplicate();
+
+  // Get the submitted values
+  $values = $form_state->getValues();
+
+  // Update only the title of the new node
+  // Assuming the title field is 'title' and its new value is in $values['title']
+  if (isset($values['title'])) {
+      $new_node->setTitle($values['title']);
+  }
+
+  // Save the new node
+  $new_node->save();
+
+  // Add a custom message
+  \Drupal::messenger()->addMessage(t('Record duplicated. Update fields below (as needed) and then save.'));
+
+  // Redirect to the edit form of the new node
+  $form_state->setRedirect('entity.node.edit_form', ['node' => $new_node->id()]);
+
+}
+
+

@@ -1,0 +1,7 @@
+type: module
+name: 'Stressor Response Library Module'
+description: 'Stressor response library module addons'
+core_version_requirement: ^10
+version: '0.0.01'
+project: 'stressor_module'
+datestamp: 1685631348

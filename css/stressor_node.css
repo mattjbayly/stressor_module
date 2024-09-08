@@ -1,0 +1,12 @@
+.two-column {
+    column-count: 2;
+}
+
+.field--name-field-life-stage h4 {
+    font-size: smaller;
+}
+
+
+.field--name-field-stressor-response-csv-data {
+    column-count: 2;
+}

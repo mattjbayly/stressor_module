@@ -1,0 +1,31 @@
+stressor_module.content:
+  path: '/stressorcontent'
+  defaults:
+    _controller: '\Drupal\stressor_module\Controller\StressorModuleController::content'
+    _title: 'Stressor'
+  requirements:
+    _permission: 'access content'
+
+stressor_module.comparisonplots:
+  path: '/stressor-plot/{ids}'
+  defaults:
+    _controller: '\Drupal\stressor_module\Controller\StressorModuleController::stressorPlot'
+    _title: 'Stressor Comparison Plots'
+  requirements:
+    _permission: 'access content'
+    ids: '.+'
+
+stressor_module.download_csv:
+  path: '/stressor_module/files/demo_sr'
+  defaults:
+    _controller: '\Drupal\stressor_module\Controller\StressorModuleController::downloadCsv'
+  requirements:
+    _permission: 'access content'
+
+stressor_module.download_excel_full:
+  path: '/download_excel_full/{ids}'
+  defaults:
+    _controller: '\Drupal\stressor_module\Controller\DownloadExcelController::downloadExcelFull'
+    _title: 'Download Excel Full'
+  requirements:
+    _permission: 'access content'
