@@ -234,6 +234,7 @@ class StressorModuleController extends ControllerBase
             '#attached' => [
                 'library' => [
                     'stressor_module/highcharts',
+                    'stressor_module/stressor-modal',
                 ],
             ],
             '#markup' => $this->t('Received IDs: @ids', ['@ids' => print_r($ids_array, TRUE)]),

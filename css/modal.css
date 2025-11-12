@@ -1,0 +1,39 @@
+/* modal overlay */
+#stressor-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  /* modal window */
+#stressor-modal {
+  background: #fff;
+  padding: 1.5em;
+  border-radius: 4px;
+
+  /* limit width */
+  max-width: 700px;
+  width: 90%;            /* fluid down to small screens */
+
+  /* limit height to viewport minus offsets, then scroll */
+  max-height: calc(100vh - 100px); /* 50px top + 50px bottom */
+  overflow-y: auto;
+
+  /* center in overlay but leave that 50px “cushion” */
+  margin: 50px auto;
+  position: relative;
+}
+  /* close button */
+  #stressor-modal .close-btn {
+    position: absolute;
+    top: 0.5em; right: 0.5em;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  

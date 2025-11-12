@@ -6,6 +6,14 @@ stressor-module-css-js:
     theme:
       css/stressor_module.css: {}
 
+stressor-modal:
+  css:
+    theme:
+      css/modal.css: {}
+  js:
+    js/modal.js: {}
+  dependencies:
+
 stressor-module-node:
   js:
     js/highcharts.js: {}

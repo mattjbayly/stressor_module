@@ -141,9 +141,16 @@ input[type=checkbox].sr-select {
     display: inline-block;
 }
 .node-content .field__label {
-    font-size: smaller;
+    /*font-size: larger;*/
     color: #6b6d6d;
 }
+
+.node-content .field-item {
+    text-align: justify;
+    font-size: smaller;
+    margin-bottom: 10px;
+}
+
 .node-content .layout--threecol-section .field-item {
     display: inline-block;
 }
@@ -155,6 +162,10 @@ input[type=checkbox].sr-select {
     white-space: pre;
     font-weight: bolder;
     color: #132f58;
+}
+
+#field_stressor_response_csv_data-0-csvfiletable {
+    margin: auto;
 }
 
 .node-content #field_stressor_response_csv_data-0-csvfiletable {
@@ -236,3 +247,7 @@ input[type=checkbox].sr-select {
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
+
+  #edit-combine {
+    background-color: #ffffaf;
+  }

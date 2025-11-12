@@ -58,6 +58,10 @@ th.field-label {
     column-count: 2;
     column-gap: 2px;
 }
+.form-twocols fieldset {
+  break-inside: avoid;
+}
+
 .form-tworow3 {
     column-count: 2;
     column-gap: 2px;
@@ -113,4 +117,13 @@ th.field-label {
     border: white;
     padding: 2px;
     box-sizing: unset;
+}
+
+/* Make text inputs fit inside the Species Info box */
+#edit-group-species input.form-text,
+#edit-group-species textarea,
+#edit-group-species select {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 }

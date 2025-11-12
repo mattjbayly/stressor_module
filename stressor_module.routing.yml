@@ -29,3 +29,11 @@ stressor_module.download_excel_full:
     _title: 'Download Excel Full'
   requirements:
     _permission: 'access content'
+
+stressor_module.download_sr_json:
+  path: '/download_sr_json/{ids}'
+  defaults:
+    _controller: '\Drupal\stressor_module\Controller\DownloadJsonController::downloadJson'
+    _title: 'Download JSON Full'
+  requirements:
+    _permission: 'access content'

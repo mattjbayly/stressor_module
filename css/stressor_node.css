@@ -8,5 +8,12 @@
 
 
 .field--name-field-stressor-response-csv-data {
-    column-count: 2;
+    column-count: 1;
+}
+
+#chartContainer {
+    width: 100%; /* Makes the chart responsive */
+    height: auto;
+    max-width: 700px; /* Adjust the max width to your desired PDF width */
+    margin: 0 auto; /* Centers the chart */
 }

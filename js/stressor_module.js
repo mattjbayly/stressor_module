@@ -5,6 +5,7 @@ function updateLink() {
 
     var baseUrl = "/stressor-plot/";
     var baseUrl_download = "/download_excel_full/";
+    var baseUrl_download_json = "/download_sr_json/";
     var queryString = values.length > 0 ? values.join(",") : "";
 
     var link = document.getElementById("stressor-plot-button");
@@ -12,6 +13,7 @@ function updateLink() {
 
     var d_btn = document.getElementById("stressor-download-buttons");
     var d_btn_full = document.getElementById("stressor-download-full");
+    var d_btn_json = document.getElementById("stressor-download-json");
 
     // Enable or disable the link
     if (values.length === 0) {
@@ -19,11 +21,13 @@ function updateLink() {
         d_btn.classList.add('bdisabled');
         link.removeAttribute('href'); // Remove href attribute when disabled
         d_btn_full.removeAttribute('href');
+        d_btn_json.removeAttribute('href');
     } else {
         link.classList.remove('bdisabled');
         d_btn.classList.remove('bdisabled');
         link.setAttribute('href', baseUrl + queryString); // Re-add href attribute when enabled
         d_btn_full.setAttribute('href', baseUrl_download + queryString);
+        d_btn_json.setAttribute('href', baseUrl_download_json + queryString);
     }
 }
 

@@ -21,6 +21,22 @@ function stressor_module_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
+ * Implements hook_page_attachments().
+ */
+function stressor_module_page_attachments(array &$attachments) {
+  // Get the *alias* for the current internal path.
+  $current_path   = \Drupal::service('path.current')->getPath();
+  $alias          = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+
+  if ($alias === '/stressor-response') {
+    // Attach both your other libraries *and* the modal here:
+    $attachments['#attached']['library'][] = 'stressor_module/stressor-module-css-js';
+    $attachments['#attached']['library'][] = 'stressor_module/stressor-modal';
+  }
+}
+
+
+/**
  * Implements hook_preprocess_node().
  */
 function stressor_module_preprocess_node(&$variables) {
@@ -36,7 +52,7 @@ function stressor_module_preprocess_node(&$variables) {
     //\Drupal::messenger()->addMessage(t("Doing it..."));
 
     $custom_html = '<a href="/stressor-response/"><i class="fa fa-solid fa-arrow-left"></i> View all records in the stressor response library</a>';
-    $highcharts_div = '<div id="parentChartContianer"><br><p>Stressor Response Chart</p><div id="chartContainer"></div></div>';
+    $highcharts_div = '<div id="parentChartContianer"><p>Stressor Response Chart</p><div id="chartContainer"></div><br></div>';
 
     // Use Drupal's renderer service to render the node content array to a string.
     $content_rendered = \Drupal::service('renderer')->renderRoot($variables['content']);
@@ -47,6 +63,7 @@ function stressor_module_preprocess_node(&$variables) {
     $variables['#attached']['library'][] = 'stressor_module/stressor-module-node';
   }
 }
+
 
 /**
  * Implements hook_preprocess_views_view().
@@ -112,7 +129,7 @@ function stressor_module_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
     $download_link = \Drupal\Core\Url::fromRoute('stressor_module.download_csv')->toString();
     $custom_markup = [
       '#type' => 'markup',
-      '#markup' => '<h3><a href="/sr-curve-trace" target="_blank">Use the SR curve tracing tool</a></h3><a href="' . $download_link . '" download>Download Sample CSV</a>',
+      '#markup' => '<h3>Upload Stressor-Response csv Data File</h3><h4><a href="/sr-curve-trace" target="_blank">Use the SR curve tracing tool</a></h4><a href="' . $download_link . '" download>Download a sammple csv SR file and edit</a>',
     ];
 
     // Render the markup array into an HTML string.
